@@ -1,6 +1,6 @@
-const { Model, DataTypes } = require('sequelize');
-const bcrypt = require('bcrypt');
-const sequelize = require('../config/connection');
+const { Model, DataTypes } = require("sequelize");
+const bcrypt = require("bcrypt");
+const sequelize = require("../config/connection");
 
 class Patient extends Model {
   checkPassword(loginPw) {
@@ -21,12 +21,12 @@ Patient.init(
       allowNull: false,
     },
     lastName: {
-        type: DataTypes.STRING,
-        allowNull: false,
+      type: DataTypes.STRING,
+      allowNull: false,
     },
     email: {
-        type: DataTypes.STRING,
-        allowNull: false,
+      type: DataTypes.STRING,
+      allowNull: false,
     },
     password: {
       type: DataTypes.STRING,
@@ -38,27 +38,33 @@ Patient.init(
     doctor_id: {
       type: DataTypes.INTEGER,
       references: {
-        model: 'doctor',
-        key: 'id'
-      }
-    }
+        model: "doctor",
+        key: "id",
+      },
+    },
   },
   {
     hooks: {
-      beforeCreate: async (newUserData) => {
-        newUserData.password = await bcrypt.hash(newUserData.password, 10);
-        return newUserData;
+      beforeCreate: async (newPatientData) => {
+        newPatientData.password = await bcrypt.hash(
+          newPatientData.password,
+          10
+        );
+        return newPatientData;
       },
-      beforeUpdate: async (updatedUserData) => {
-        updatedUserData.password = await bcrypt.hash(updatedUserData.password, 10);
-        return updatedUserData;
+      beforeUpdate: async (updatedPatientData) => {
+        updatedPatientData.password = await bcrypt.hash(
+          updatedPatientData.password,
+          10
+        );
+        return updatedPatientData;
       },
     },
     sequelize,
     timestamps: false,
     freezeTableName: true,
     underscored: true,
-    modelName: 'user',
+    modelName: "patient",
   }
 );
 

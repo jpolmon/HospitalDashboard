@@ -1,15 +1,31 @@
-const Patient = require('./Patient');
-const Medicine = require('./Medicine');
-const Doctor = require('./Doctor');
+const Patient = require("./Patient");
+const Medicine = require("./Medicine");
+const Doctor = require("./Doctor");
+const Treatment = require("./Treatment");
 
-
-Patient.hasMany(Doctor, {
-  foreignKey: 'patient_id',
-  onDelete: 'CASCADE'
+Doctor.hasMany(Patient, {
+  foreignKey: "doctor_id",
+  onDelete: "CASCADE",
 });
 
-Medicine.belongsTo(Patient, {
-  foreignKey: 'patient_id'
+Patient.belongsTo(Doctor, {
+  foreignKey: "doctor_id",
 });
 
-module.exports = { Patient, Medicine, Doctor };
+Patient.belongsToMany(Medicine, {
+  through: {
+    model: Treatment,
+    unique: false,
+  },
+  as: "patient_medicine",
+});
+
+Medicine.belongsToMany(Patient, {
+  through: {
+    model: Treatment,
+    unique: false,
+  },
+  as: "prescription",
+});
+
+module.exports = { Patient, Medicine, Doctor, Treatment };

@@ -38,24 +38,24 @@ Doctor.init(
   },
   {
     hooks: {
-      beforeCreate: async (newUserData) => {
-        newUserData.password = await bcrypt.hash(newUserData.password, 10);
-        return newUserData;
+      beforeCreate: async (newDoctorData) => {
+        newDoctorData.password = await bcrypt.hash(newDoctorData.password, 10);
+        return newDoctorData;
       },
-      beforeUpdate: async (updatedUserData) => {
-        updatedUserData.password = await bcrypt.hash(
-          updatedUserData.password,
+      beforeUpdate: async (updatedDoctorData) => {
+        updatedDoctorData.password = await bcrypt.hash(
+          updatedDoctorData.password,
           10
         );
-        return updatedUserData;
+        return updatedDoctorData;
       },
     },
     sequelize,
     timestamps: false,
     freezeTableName: true,
     underscored: true,
-    modelName: "user",
+    modelName: "doctor",
   }
 );
 
-module.exports = User;
+module.exports = Doctor;

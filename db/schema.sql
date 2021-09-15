@@ -1,2 +1,2 @@
-DROP DATABASE IF EXISTS '';
-CREATE DATABASE '';
+DROP DATABASE IF EXISTS 'patientPortal_db';
+CREATE DATABASE 'patientPortal_db';

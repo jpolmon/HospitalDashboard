@@ -1,0 +1,20 @@
+[
+    {
+        "firstName": "Meredith",
+        "lastName": "Grey",
+        "email": "drgrey@hotmail.com",
+        "password": "password1234"
+    },
+    {
+        "firstName": "Cristina",
+        "lastName": "Yang",
+        "email": "dryang@aol.com",
+        "password": "password"
+    },
+    {
+        "firstName": "Jane",
+        "lastName": "Smith",
+        "email": "drsmith@gmail.com",
+        "password": "abc123"
+    }
+]

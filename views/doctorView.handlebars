@@ -1,0 +1,48 @@
+<div class="row">
+  <div class="col-auto">
+    <h2>Welcome, Dr. {{lastName}}!</h2>
+  </div>
+</div>
+
+<div class="row mt-4">
+  <div class="col-md-6">
+    <h3>Add Patient:</h3>
+
+    <form class="form new-patient-form">
+      <div class="form-group">
+        <label for="patient-firstName">patient first name:</label>
+        <input class="form-input" type="text" id="patient-firstName" name="patient-firstName" />
+      </div>
+      <div class="form-group">
+        <label for="patient-lastName">patient last name:</label>
+        <input class="form-input" type="text" id="patient-lastName" name="patient-lastName" />
+      </div>
+      <div class="form-group">
+        <label for="patient-email">email:</label>
+        <input class="form-input" type="number" id="patient-email" name="patient-email" />
+      </div>
+      <div class="form-group">
+        <button type="submit" class="btn btn-primary">Create</button>
+      </div>
+    </form>
+  </div>
+
+  {{#if patients.length}}
+  <div class="col-md-6 patient-list">
+    <h3>Current patients:</h3>
+
+    {{#each patients as |patient|}}
+    <div class="row mb-2">
+      <div class="col-md-8">
+        <h4><a href="/project/{{patient.id}}">{{patient.firstName}}{{patient.lastName}}</a></h4>
+      </div>
+      <div class="col-md-4">
+        <button class="btn btn-sm btn-danger" data-id="{{patient.id}}">DELETE</button>
+      </div>
+    </div>
+    {{/each}}
+  </div>
+  {{/if}}
+</div>
+
+<script src="./js/doctorView.js"></script>

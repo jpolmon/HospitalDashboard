@@ -58,4 +58,4 @@ Doctor.init(
   }
 );
 
-module.exports = User;
+module.exports = Doctor;

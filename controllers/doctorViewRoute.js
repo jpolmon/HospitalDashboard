@@ -8,7 +8,7 @@ router.get("/", withAuth, async (req, res) => {
     // Find the logged in user based on the session ID
     const userData = await Doctor.findByPk(req.session.id, {
       attributes: { exclude: ["password"] },
-      include: [{ model: Patient }],
+      include: [{ model: Patient, Medicine }],
     });
 
     const staff = userData.get({ plain: true });

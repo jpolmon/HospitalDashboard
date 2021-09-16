@@ -1,6 +1,6 @@
 const router = require("express").Router();
-const { Doctor, Patient, Medicine } = require("../models");
-const withAuth = require("../utils/auth");
+const { Doctor, Patient, Medicine } = require("../../models");
+const withAuth = require("../../utils/auth");
 
 // Use withAuth middleware to prevent access to route
 router.get("/", withAuth, async (req, res) => {

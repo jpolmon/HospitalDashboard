@@ -17,7 +17,6 @@ router.get("/patientView", withAuth, async (req, res) => {
     // Find the logged in patient based on the session ID
     const patientData = await Patient.findByPk(req.session.patient_id, {
       attributes: { exclude: ["password"] },
-      include: [{ model: Post }, { model: Comment }],
     });
 
     const patient = patientData.get({ plain: true });

@@ -2,16 +2,19 @@
     {
         "firstName": "Sally",
         "lastName": "Alvarenga",
-        "email": "sally@hotmail.com"
+        "email": "sally@hotmail.com",
+        "password": "googleCat3"
     },
     {
         "firstName": "Jonathan",
         "lastName": "Olmon",
-        "email": "j.olmon@aol.com"
+        "email": "j.olmon@aol.com",
+        "password": "toyTrain67"
     },
     {
         "firstName": "Jane",
         "lastName": "Smith",
-        "email": "drsmith@gmail.com"
+        "email": "drsmith@gmail.com",
+        "password": "goofyGoober27"
     }
 ]

@@ -1,0 +1,42 @@
+[
+    {
+        "name":"Atorvastatin",
+        "price": "6.68"
+    },
+    {
+        "name":"Lisinopril",
+        "price": "4.00"
+    },
+    {
+        "name":"Albuterol",
+        "price": "19.05"
+    },
+    {
+        "name":"Levothyroxine",
+        "price": "4.00"
+    },
+    {
+        "name":"Amlodipine",
+        "price": "5.34"
+    },
+    {
+        "name":"Gabapentin",
+        "price": "7.69"
+    },
+    {
+        "name":"Omeprazole",
+        "price": "9.66"
+    },
+    {
+        "name":"Metformin",
+        "price": "4.00"
+    },
+    {
+        "name":"Losartan",
+        "price": "8.51"
+    },
+    {
+        "name":"Acetaminophen",
+        "price": "18.25"
+    }
+]

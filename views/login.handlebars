@@ -1,66 +1,78 @@
 <main class="columns mt-3">
   <section class="column is-3 is-offset-2">
-    <div class="field">
-      <label class="label is-size-3">Existing Staff/Patients</label>
-      <p class="control has-icons-left has-icons-right">
-        <input class="input is-medium" type="email" placeholder="Email">
-        <span class="icon is-small is-left">
-          <i class="fas fa-envelope"></i>
-        </span>
-      </p>
-    </div>
-    <div class="field">
-      <p class="control has-icons-left">
-        <input class="input is-medium" type="password" placeholder="Password">
-        <span class="icon is-small is-left">
-          <i class="fas fa-lock"></i>
-        </span>
-      </p>
-    </div>
-    <div class="field">
-      <p class="control">
-        <button class="button is-success">
-          Login
-        </button>
-      </p>
-    </div>
+    <form id="login">
+      <div class="field">
+        <label class="label is-size-3">Existing Staff/Patients</label>
+        <p class="control has-icons-left has-icons-right">
+          <input class="input is-medium" type="email" placeholder="Email" id="email-login">
+          <span class="icon is-small is-left">
+            <i class="fas fa-envelope"></i>
+          </span>
+        </p>
+      </div>
+      <div class="field">
+        <p class="control has-icons-left">
+          <input class="input is-medium" type="password" placeholder="Password" id="password-login">
+          <span class="icon is-small is-left">
+            <i class="fas fa-lock"></i>
+          </span>
+        </p>
+      </div>
+      <div class="field">
+        <p class="control">
+          <button class="button is-success" id="login-btn">
+            Login
+          </button>
+        </p>
+      </div>
+    </form>  
   </section>
 
   <section class="column is-3 is-offset-2">
-    <div class="field">
-      <label class="label is-size-3">New Patients</label>
-      <p class="control has-icons-left has-icons-right">
-        <input class="input is-medium" type="email" placeholder="Name">
-        <span class="icon is-small is-left">
-          <i class="fas fa-user"></i>
-        </span>
-      </p>
-      <p class="help">First and Last name please. e.g. "John Doe"</p>
-    </div>
-    <div class="field">
-      <p class="control has-icons-left has-icons-right">
-        <input class="input is-medium" type="email" placeholder="Email">
-        <span class="icon is-small is-left">
-          <i class="fas fa-envelope"></i>
-        </span>
-      </p>
-    </div>
-    <div class="field">
-      <p class="control has-icons-left">
-        <input class="input is-medium" type="password" placeholder="Password">
-        <span class="icon is-small is-left">
-          <i class="fas fa-lock"></i>
-        </span>
-      </p>
-      <p class="help">Must be at least 8 characters</p>
-    </div>
-    <div class="field">
-      <p class="control">
-        <button class="button is-success">
-          Sign Up
-        </button>
-      </p>
-    </div>
+    <form id="signup">
+      <div class="field">
+        <label class="label is-size-3">New Patients</label>
+        <p class="control has-icons-left has-icons-right">
+          <input class="input is-medium" type="text" placeholder="First Name" id="first-name-signup">
+          <span class="icon is-small is-left">
+            <i class="fas fa-user"></i>
+          </span>
+        </p>
+      </div>
+      <div class="field">
+        <p class="control has-icons-left has-icons-right">
+          <input class="input is-medium" type="text" placeholder="Last Name" id="last-name-signup">
+          <span class="icon is-small is-left">
+            <i class="fas fa-user"></i>
+          </span>
+        </p>
+        <p class="help">First and Last name please. e.g. "John Doe"</p>
+      </div>
+      <div class="field">
+        <p class="control has-icons-left has-icons-right">
+          <input class="input is-medium" type="email" placeholder="Email" id="email-signup">
+          <span class="icon is-small is-left">
+            <i class="fas fa-envelope"></i>
+          </span>
+        </p>
+      </div>
+      <div class="field">
+        <p class="control has-icons-left">
+          <input class="input is-medium" type="password" placeholder="Password" id="password-signup">
+          <span class="icon is-small is-left">
+            <i class="fas fa-lock"></i>
+          </span>
+        </p>
+        <p class="help">Must be at least 8 characters</p>
+      </div>
+      <div class="field">
+        <p class="control">
+          <button class="button is-success" id="signup-btn">
+            Sign Up
+          </button>
+        </p>
+      </div>
+    </form>  
   </section>
 </main>
 

@@ -1,48 +1,45 @@
-<div class="row">
-  <div class="col-auto">
-    <h2>Welcome, Dr. {{lastName}}!</h2>
-  </div>
-</div>
-
-<div class="row mt-4">
-  {{#if patients.length}}
-  <div class="col-md-6 patient-list">
-    <h3>Current patients:</h3>
-
-    {{#each patients as |patient|}}
-    <div class="row mb-2">
-      <div class="col-md-8">
-        <h4><a href="/project/{{patient.id}}">{{patient.firstName}}{{patient.lastName}}</a></h4>
+<section>
+    <article class="mt-4"> 
+        <h1 class="title has-text-centered">Welcome Dr. {{lastName}}!</h1> 
+    </article>
+    
+    <main class ="columns mt-3">
+      <div class="column is-4 is offset-1">
+        <section class="panel is-info">
+          <p class="panel-heading">
+            Patient Info
+          </p>
+          <p class="panel-tabs">
+            <a class="is-active">All</a>
+            <a>Adults</a>
+            <a>Children</a>
+            <a>Infants</a>
+          </p>
+          <div class="panel-block">
+            <p class="control has-icons-left">
+              <input class="input is-info" type="text" placeholder="Search">
+              <span class="icon is-left">
+                <i class="fas fa-search" aria-hidden="true"></i>
+              </span>
+            </p>
+          </div>
+          <a class="panel-block">
+            <span class="panel-icon">
+              <i class="fas fa-book" aria-hidden="true"></i>
+            </span>
+            Test Box
+          </a>
+          {{#each patients as |patient|}}
+          <a class="panel-block is-active">
+            <span class="panel-icon">
+              <i class="fas fa-book" aria-hidden="true"></i>
+            </span>
+            bulma
+          </a>
+          {{/each}}
+        </section>
       </div>
-      <div class="col-md-4">
-        <button class="btn btn-sm btn-danger" data-id="{{Medicine.id}}">Add Medication</button>
-      </div>
-    </div>
-    {{/each}}
-  </div>
-  {{/if}}
-
-  <div class="col-md-6">
-    <h3>Medication List:</h3>
-
-    <form class="form new-patient-form">
-      <div class="form-group">
-        <label for="patient-firstName">patient first name:</label>
-        <input class="form-input" type="text" id="patient-firstName" name="patient-firstName" />
-      </div>
-      <div class="form-group">
-        <label for="patient-lastName">patient last name:</label>
-        <input class="form-input" type="text" id="patient-lastName" name="patient-lastName" />
-      </div>
-      <div class="form-group">
-        <label for="patient-email">email:</label>
-        <input class="form-input" type="number" id="patient-email" name="patient-email" />
-      </div>
-      <div class="form-group">
-        <button type="submit" class="btn btn-primary">Create</button>
-      </div>
-    </form>
-  </div>
-</div>
+    </main> 
+  </section>
 
 <script src="./js/doctorView.js"></script>

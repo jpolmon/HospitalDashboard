@@ -1,48 +1,61 @@
-const router = require('express').Router();
-const { Doctor, Patient } = require('../models');
-const withAuth = require('../utils/auth');
+const router = require("express").Router();
+const { Doctor, Patient, Treatment } = require("../models");
+const withAuth = require("../utils/auth");
 
-router.get('/', (req, res) => {
+router.get("/", (req, res) => {
   try {
     res.render("login", {
-      logged_in : req.session.logged_in,
+      logged_in: req.session.logged_in,
     });
   } catch (err) {
     res.status(500).json(err);
   }
 });
 
-router.get('/doctorView', async (req, res) => {
+router.get("/doctorView", withAuth, async (req, res) => {
   try {
-    const doctorData = await Doctor.findByPk(req.params.doctor_id, {
+    const doctorData = await Doctor.findByPk(req.session.doctor_id, {
       attributes: { exclude: ["password"] },
+      include: [
+        {
+          model: Patient,
+          // attributes: ["firstName, lastName"],
+        },
+      ],
     });
-
     const doctor = doctorData.get({ plain: true });
 
-    res.render('doctorView', {
-      ...doctor,
-      logged_in: req.session.logged_in
-    });
+    // const patientData = await Patient.findAll({
+    //   include: [
+    //     {
+    //       model: Patient,
+    //       // attributes: ["firstName, lastName"],
+    //     },
+    //   ],
+    // });
+    // const patients = patientData.get({ plain: true });
+    res.json(doctor);
+    // res.render("doctorView", {
+    //   ...doctor,
+    //   logged_in: req.session.logged_in,
+    // });
   } catch (err) {
     res.status(500).json(err);
   }
 });
 
-router.get('/patientView', async (req, res) => {
+router.get("/patientView", async (req, res) => {
   try {
-    const patientData = await Patient.findByPk(req.params.patient_id, {
+    const patientData = await Patient.findByPk(req.session.patient_id, {
       attributes: { exclude: ["password"] },
     });
-        
+
     const patient = patientData.get({ plain: true });
 
-    res.render('patientView', 
-    {
+    res.render("patientView", {
       ...patient,
-      logged_in: req.session.logged_in
-    }
-    );
+      logged_in: req.session.logged_in,
+    });
   } catch (err) {
     res.status(500).json(err);
   }

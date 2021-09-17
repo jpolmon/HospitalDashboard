@@ -13,16 +13,11 @@ const seedDatabase = async () => {
     returning: true,
   });
 
-  const patients = [];
-  // reference Unit 13, activity 21
-  for (const patient of patientData) {
-    patients.push(
-      await Patient.create({
-        ...patient,
-        doctor_id: doctors[Math.floor(Math.random() * doctors.length)].id,
-      })
-    );
-  }
+  // const patients = [];
+  const patients = await Patient.bulkCreate(patientData, {
+    individualHooks: true,
+    returning: true,
+  });
 
   const medications = await Medicine.bulkCreate(medicineData);
 

@@ -3,18 +3,21 @@
         "firstName": "Sally",
         "lastName": "Alvarenga",
         "email": "sally@hotmail.com",
-        "password": "googleCat3"
+        "password": "googleCat3",
+        "doctor_id": 2
     },
     {
         "firstName": "Jonathan",
         "lastName": "Olmon",
         "email": "j.olmon@aol.com",
-        "password": "toyTrain67"
+        "password": "toyTrain67",
+        "doctor_id": 2
     },
     {
         "firstName": "Jane",
         "lastName": "Smith",
         "email": "drsmith@gmail.com",
-        "password": "goofyGoober27"
+        "password": "goofyGoober27",
+        "doctor_id": 2
     }
 ]

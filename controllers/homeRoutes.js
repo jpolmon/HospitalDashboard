@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const { Patient } = require("../models");
+const { Patient, Treatment, Medicine } = require("../models");
 const withAuth = require("../utils/auth");
 
 router.get("/", async (req, res) => {
@@ -21,11 +21,32 @@ router.get("/patientView", withAuth, async (req, res) => {
 
     const patient = patientData.get({ plain: true });
 
+    const treatments = await Treatment.findAll({
+      where: { patient_id: req.session.patient_id },
+    });
+
+    const medications = [];
+    for (const treatment of treatments) {
+      medications.push(await Medicine.findByPk(treatment.medicine_id));
+    }
+
+    const medicine = medications.map((medication) =>
+      medication.get({ plain: true })
+    );
+
+    let totalValue = 0.0;
+    for (const medicine of medications) {
+      totalValue += medicine.price;
+    }
+
     res.render("patientView", {
-      ...patient,
-      logged_in: true,
+      patient: patient,
+      medications: medicine,
+      total: totalValue.toFixed(2),
+      logged_in: req.session.logged_in,
     });
   } catch (err) {
+    console.log(err);
     res.status(500).json(err);
   }
 });

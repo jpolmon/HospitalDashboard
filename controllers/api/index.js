@@ -1,6 +1,6 @@
 const router = require("express").Router();
 
-const loginRoutes = require("./loginRoute");
+// const loginRoutes = require("./loginRoute");
 const doctorViewRoutes = require("./doctorViewRoute");
 const patientViewRoutes = require("./patientViewRoute");
 

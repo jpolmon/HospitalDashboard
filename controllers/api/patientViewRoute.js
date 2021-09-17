@@ -21,7 +21,7 @@ router.get('/:id', async (req, res) => {
   });
 
 // CREATE a patient
-router.post('/', async (req, res) => {
+router.post('/', withAuth, async (req, res) => {
     try {
       const patientData = await Patient.create(req.body);
       res.status(200).json(patientData);

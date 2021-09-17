@@ -13,6 +13,8 @@ router.get("/", withAuth, async (req, res) => {
 
     const staff = userData.get({ plain: true });
 
+    console.log(req.session);
+
     res.render("doctorView", {
       ...staff,
       logged_in: true,

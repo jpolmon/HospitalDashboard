@@ -7,11 +7,20 @@ const loginFormHandler = async (event) => {
 
   if (email && password) {
     // Send a POST request to the API endpoint
-    const response = await fetch("/api/patient/login", {
-      method: "POST",
-      body: JSON.stringify({ email, password }),
-      headers: { "Content-Type": "application/json" },
-    });
+    let response;
+    if (email.includes("@greymemorial")) {
+      response = await fetch("/api/doctor/login", {
+        method: "POST",
+        body: JSON.stringify({ email, password }),
+        headers: { "Content-Type": "application/json" },
+      });
+    } else {
+      response = await fetch("/api/patient/login", {
+        method: "POST",
+        body: JSON.stringify({ email, password }),
+        headers: { "Content-Type": "application/json" },
+      });
+    }
 
     if (response.ok) {
       // If successful, redirect the browser to the profile page

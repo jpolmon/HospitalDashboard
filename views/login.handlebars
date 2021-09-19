@@ -11,7 +11,7 @@
         </p>
       </div>
       <div class="field">
-        <p class="control has-icons-left">
+        <p class="control has-icons-left" id="login">
           <input class="input is-medium" type="password" placeholder="Password" id="password-login">
           <span class="icon is-small is-left">
             <i class="fas fa-lock"></i>
@@ -30,8 +30,9 @@
 
   <section class="column is-3 is-offset-2">
     <form id="signup">
-      <div class="field">
-        <label class="label is-size-3">New Patients</label>
+      <div class="field" id="first-name">
+        <label class="label is-size-3 mb-0">New Patients</label>
+        <label class="label is-size-3">(All fields required)</label>
         <p class="control has-icons-left has-icons-right">
           <input class="input is-medium" type="text" placeholder="First Name" id="first-name-signup">
           <span class="icon is-small is-left">
@@ -39,14 +40,13 @@
           </span>
         </p>
       </div>
-      <div class="field">
+      <div class="field" id="last-name">
         <p class="control has-icons-left has-icons-right">
           <input class="input is-medium" type="text" placeholder="Last Name" id="last-name-signup">
           <span class="icon is-small is-left">
             <i class="fas fa-user"></i>
           </span>
         </p>
-        <p class="help">First and Last name please. e.g. "John Doe"</p>
       </div>
       <div class="field">
         <p class="control has-icons-left has-icons-right">
@@ -56,7 +56,7 @@
           </span>
         </p>
       </div>
-      <div class="field">
+      <div class="field" id="pass">
         <p class="control has-icons-left">
           <input class="input is-medium" type="password" placeholder="Password" id="password-signup">
           <span class="icon is-small is-left">

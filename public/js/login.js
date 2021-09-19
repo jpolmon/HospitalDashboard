@@ -19,7 +19,13 @@ const loginFormHandler = async (event) => {
       // If successful, redirect the browser to the profile page
       document.location.replace("/patientView");
     } else {
-      alert(response.statusText);
+      const errorMessage = document.createElement("p");
+      errorMessage.classList.add("help");
+      errorMessage.classList.add("is-danger");
+      const container = document.getElementById("login");
+      const text = document.createTextNode("Incorrect email or password");
+      errorMessage.appendChild(text);
+      container.appendChild(errorMessage);
     }
   }
 };
@@ -42,8 +48,33 @@ const signupFormHandler = async (event) => {
     if (response.ok) {
       document.location.replace("/patientView");
     } else {
-      alert(response.statusText);
+      const passWarning = document.createElement("p");
+      passWarning.classList.add("help");
+      passWarning.classList.add("is-danger");
+      const passContainer = document.getElementById("pass");
+      const text = document.createTextNode("Password too short!");
+      passWarning.appendChild(text);
+      passContainer.appendChild(passWarning);
+      document.getElementById("password-signup").classList.add("is-danger");
     }
+  } else if (!firstName) {
+    const firstNameWarning = document.createElement("p");
+    firstNameWarning.classList.add("help");
+    firstNameWarning.classList.add("is-danger");
+    const firstContainer = document.getElementById("first-name");
+    const text = document.createTextNode("Please input a first name!");
+    firstNameWarning.appendChild(text);
+    firstContainer.appendChild(firstNameWarning);
+    document.getElementById("first-name-signup").classList.add("is-danger");
+  } else if (!lastName) {
+    const lastNameWarning = document.createElement("p");
+    lastNameWarning.classList.add("help");
+    lastNameWarning.classList.add("is-danger");
+    const lastContainer = document.getElementById("last-name");
+    const text = document.createTextNode("Please input a last name!");
+    lastNameWarning.appendChild(text);
+    lastContainer.appendChild(lastNameWarning);
+    document.getElementById("last-name-signup").classList.add("is-danger");
   }
 };
 

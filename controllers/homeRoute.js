@@ -1,10 +1,27 @@
 const router = require("express").Router();
-const { Patient, Treatment, Medicine } = require("../models");
+const { Doctor, Patient } = require("../models");
 const withAuth = require("../utils/auth");
 
 router.get("/", async (req, res) => {
   try {
     res.render("login", {
+      logged_in: req.session.logged_in,
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+router.get("/doctorView", async (req, res) => {
+  try {
+    const doctorData = await Doctor.findByPk(req.params.doctor_id, {
+      attributes: { exclude: ["password"] },
+    });
+
+    const doctor = doctorData.get({ plain: true });
+
+    res.render("doctorView", {
+      ...doctor,
       logged_in: req.session.logged_in,
     });
   } catch (err) {
@@ -49,6 +66,15 @@ router.get("/patientView", withAuth, async (req, res) => {
     console.log(err);
     res.status(500).json(err);
   }
+});
+
+router.get("/login", (req, res) => {
+  if (req.session.logged_in) {
+    res.redirect("/dashboard");
+    return;
+  }
+
+  res.render("login");
 });
 
 module.exports = router;

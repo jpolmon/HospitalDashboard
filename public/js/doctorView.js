@@ -4,11 +4,11 @@ const newFormHandler = async (event) => {
   const firstName = document.querySelector("#patient-firstName").value.trim();
   const lastName = document.querySelector("#patient-lastName").value.trim();
   const email = document.querySelector("#patient-email").value.trim();
-
+  
   if (firstName && lastName && email) {
     const response = await fetch(`/api/patients`, {
       method: "POST",
-      body: JSON.stringify({ firstName, lastName, email }),
+      body: JSON.stringify({ firstName, lastName, email}),
       headers: {
         "Content-Type": "application/json",
       },
@@ -26,14 +26,14 @@ const delButtonHandler = async (event) => {
   if (event.target.hasAttribute("data-id")) {
     const id = event.target.getAttribute("data-id");
 
-    const response = await fetch(`/api/projects/${id}`, {
+    const response = await fetch(`/api/patients/${id}`, {
       method: "DELETE",
     });
 
     if (response.ok) {
-      document.location.replace("/profile");
+      document.location.replace("/patient");
     } else {
-      alert("Failed to delete project");
+      alert("Failed to delete ");
     }
   }
 };

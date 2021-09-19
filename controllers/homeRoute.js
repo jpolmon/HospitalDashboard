@@ -45,57 +45,43 @@ router.get("/doctorView", withAuth, async (req, res) => {
   }
 });
 
-router.get("/patientView", async (req, res) => {
+router.get("/patientView", withAuth, async (req, res) => {
   try {
+    // Find the logged in patient based on the session ID
     const patientData = await Patient.findByPk(req.session.patient_id, {
       attributes: { exclude: ["password"] },
     });
 
     const patient = patientData.get({ plain: true });
 
+    const treatments = await Treatment.findAll({
+      where: { patient_id: req.session.patient_id },
+    });
+
+    const medications = [];
+    for (const treatment of treatments) {
+      medications.push(await Medicine.findByPk(treatment.medicine_id));
+    }
+
+    const medicine = medications.map((medication) =>
+      medication.get({ plain: true })
+    );
+
+    let totalValue = 0.0;
+    for (const medicine of medications) {
+      totalValue += medicine.price;
+    }
+
     res.render("patientView", {
-      ...patient,
+      patient: patient,
+      medications: medicine,
+      total: totalValue.toFixed(2),
       logged_in: req.session.logged_in,
     });
   } catch (err) {
+    console.log(err);
     res.status(500).json(err);
   }
 });
-
-router.get("/dashboard", withAuth, async (req, res) => {
-  try {
-    const userData = await User.findByPk(req.session.user_id, {
-      attributes: { exclude: ["password"] },
-      include: [{ model: Patient, Medicine }],
-    });
-
-    const user = userData.get({ plain: true });
-
-    res.render("dashboard", {
-      ...user,
-      logged_in: true,
-    });
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
-
-router.get("/login", (req, res) => {
-  if (req.session.logged_in) {
-    res.redirect("/dashboard");
-    return;
-  }
-
-  res.render("login");
-});
-
-// router.get('/signup', (req, res) => {
-//   if (req.session.logged_in) {
-//     res.redirect('/dashboard');
-//     return;
-//   }
-
-//   res.render('signup');
-// });
 
 module.exports = router;

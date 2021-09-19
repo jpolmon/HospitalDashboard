@@ -16,8 +16,44 @@
     {
         "firstName": "Jane",
         "lastName": "Smith",
-        "email": "drsmith@gmail.com",
+        "email": "jane.smith@gmail.com",
         "password": "goofyGoober27",
         "doctor_id": 1
+    },
+    {
+        "firstName": "Tina",
+        "lastName": "Pham",
+        "email": "tpham@gmail.com",
+        "password": "ElectricBoog77",
+        "doctor_id": 2
+    },
+    {
+        "firstName": "Jeff",
+        "lastName": "Bezos",
+        "email": "jeff@msn.com",
+        "password": "BooGaloo88",
+        "doctor_id": 2
+    },
+    {
+        "firstName": "Rick",
+        "lastName": "Sanchez",
+        "email": "ricky@msn.com",
+        "password": "UniverseC37",
+        "doctor_id": 2
+    },
+    {
+        "firstName": "Morty",
+        "lastName": "Smith",
+        "email": "mortysmith@gmail.com",
+        "password": "HelloMorty64",
+        "doctor_id": 3
+    },
+    {
+        "firstName": "Rich",
+        "lastName": "Brian",
+        "email": "richbrian@gmail.com",
+        "password": "BrianRich59",
+        "doctor_id": 3
     }
+
 ]

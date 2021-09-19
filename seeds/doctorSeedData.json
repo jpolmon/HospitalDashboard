@@ -2,19 +2,19 @@
     {
         "firstName": "Meredith",
         "lastName": "Grey",
-        "email": "drgrey@hotmail.com",
+        "email": "drgrey@greymemorial.com",
         "password": "password1234"
     },
     {
         "firstName": "Cristina",
         "lastName": "Yang",
-        "email": "dryang@aol.com",
+        "email": "dryang@greymemorial.com",
         "password": "password456"
     },
     {
         "firstName": "Jane",
         "lastName": "Smith",
-        "email": "drsmith@gmail.com",
+        "email": "drsmith@greymemorial.com",
         "password": "abc123"
     }
 ]

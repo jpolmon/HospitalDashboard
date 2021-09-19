@@ -4,7 +4,12 @@ const { Doctor, Patient, Medicine } = require("../../models");
 // CREATE a patient
 router.post("/", async (req, res) => {
   try {
-    const patientData = await Patient.create(req.body);
+    const doctors = await Doctor.findAll();
+
+    const patientData = await Patient.create({
+      ...req.body,
+      doctor_id: doctors[Math.floor(Math.random() * doctors.length)].id,
+    });
 
     req.session.save(() => {
       req.session.patient_id = patientData.id;

@@ -1,34 +1,28 @@
 <section class="mt-4"> 
-    <h1 class="title has-text-centered">Welcome {{firstName}} {{lastName}}!</h1> 
+    <h1 class="title has-text-centered mt-5">Welcome to your dashboard {{patient.firstName}} {{patient.lastName}}!</h1> 
 </section>
 
-<main class="columns mt-3">
-    <section class="column is-4 is-offset-1">
+<main class="columns mt-5">
+    <section class="column is-2 is-offset-3">
+        <h3 class="label is-size-5">Your Medications:</h3>
         <table class="table is-bordered">
-            <thead class="has-text-centered">Medication Cart</thead>
-            <tbody>
-                <tr>
-                    <td>Medication 1</td>
-                    <td>$3.00</td>
-                </tr>
-                <tr>
-                    <td>Medication 2</td>
-                    <td>$5.00</td>
-                </tr>
-                <tr>
-                    <td>Medication 3</td>
-                    <td>$7.00</td>
-                </tr>
-                <tr>
-                    <td>Total</td>
-                    <td>$15.00</td>
-                </tr>                    
+            <tbody id="cart">
+                
             </tbody>
-
         </table>
     </section>
 
-    <section class="column is-4 is-offset-2">
-        
+    <section class="column is-3 is-offset-1">
+        <h2 class="label is-size-5">Select Medication to add to cart:</h2>
+        {{#each medications as |medication|}}
+            <input class="is-size-5" type="checkbox" id='{{medication.name}}' name="medication" value='{{medication.price}}'>
+            <label class="is-size-5" for='{{medication.name}}'>{{medication.name}}</label>
+            <br>                    
+        {{/each}}
+        <button class="button is-success mt-2" id="updateCartBtn">
+            Update Cart
+        </button>
     </section>
 </main>
+
+<script src="./js/patientView.js"></script>

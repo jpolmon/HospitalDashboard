@@ -1,18 +1,18 @@
 <section class="mt-4"> 
-    <h1 class="title has-text-centered">Welcome to your dashboard {{patient.firstName}} {{patient.lastName}}!</h1> 
+    <h1 class="title has-text-centered mt-5">Welcome to your dashboard {{patient.firstName}} {{patient.lastName}}!</h1> 
 </section>
 
-<main class="columns mt-3">
-    <section class="column is-4 is-offset-1">
+<main class="columns mt-5">
+    <section class="column is-2 is-offset-3">
+        <h3 class="label is-size-5">Your Medications:</h3>
         <table class="table is-bordered">
-            <thead class="has-text-centered">Your Medications:</thead>
             <tbody id="cart">
                 
             </tbody>
         </table>
     </section>
 
-    <section class="column is-4 is-offset-2">
+    <section class="column is-3 is-offset-1">
         <h2 class="label is-size-5">Select Medication to add to cart:</h2>
         {{#each medications as |medication|}}
             <input class="is-size-5" type="checkbox" id='{{medication.name}}' name="medication" value='{{medication.price}}'>

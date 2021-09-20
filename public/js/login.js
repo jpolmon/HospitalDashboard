@@ -26,7 +26,11 @@ const loginFormHandler = async (event) => {
 
     if (response.ok) {
       // If successful, redirect the browser to the profile page
-      document.location.replace("/patientView");
+      if (email.includes("@greymemorial")) {
+        document.location.replace("/doctorView");
+      } else {
+        document.location.replace("/patientView");
+      }
     } else {
       let elementsToRemove = document.querySelectorAll(".help");
       for (const element of elementsToRemove) {

@@ -4,16 +4,13 @@
     </article>
     
     <main class ="columns mt-3">
-      <div class="column is-4 is offset-1">
-        <section class="panel is-info">
+      <section class="column is-3 is offset-1">
+        <article class="panel is-info">
           <p class="panel-heading">
-            Patient Info
+            Patient Information
           </p>
           <p class="panel-tabs">
             <a class="is-active">All</a>
-            <a>Adults</a>
-            <a>Children</a>
-            <a>Infants</a>
           </p>
           <div class="panel-block">
             <p class="control has-icons-left">
@@ -23,22 +20,37 @@
               </span>
             </p>
           </div>
-          <a class="panel-block">
-            <span class="panel-icon">
-              <i class="fas fa-book" aria-hidden="true"></i>
-            </span>
-            Test Box
-          </a>
           {{#each patients as |patient|}}
-          <a class="panel-block is-active">
+          <a class="panel-block" id="patientBlock">
             <span class="panel-icon">
-              <i class="fas fa-book" aria-hidden="true"></i>
+              <i class="fas fa-user" aria-hidden="true"></i>
             </span>
-            bulma
+            {{patient.id}}: {{patient.lastName}}, {{patient.firstName}}
           </a>
           {{/each}}
-        </section>
-      </div>
+        </article>
+      </section>
+
+      <section class="column is-3 is-offset-1">
+        <h3 class="label is-size-5">Current Treatment:</h3>
+        <table class="table is-bordered">
+            <tbody id="patientTreatmentList">
+                
+            </tbody>
+        </table>
+      </section>
+
+      <section class="column is-3 is-offset-1">
+        <h2 class="label is-size-5">Select Medication to Add to Treatment:</h2>
+        {{#each allMedications as |medication|}}
+            <input class="is-size-5" type="checkbox" id='{{medication.name}}' name="medication">
+            <label class="is-size-5" for='{{medication.name}}'>{{medication.name}}</label>
+            <br>                    
+        {{/each}}
+        <button class="button is-success mt-2" id="updateTreatmentBtn">
+            Update Treatment
+        </button>
+      </section>
     </main> 
   </section>
 

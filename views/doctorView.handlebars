@@ -21,7 +21,7 @@
             </p>
           </div>
           {{#each patients as |patient|}}
-          <a class="panel-block" id="patientBlock">
+          <a class="panel-block patientBlock" id="{{patient.id}}">
             <span class="panel-icon">
               <i class="fas fa-user" aria-hidden="true"></i>
             </span>
@@ -35,7 +35,13 @@
         <h3 class="label is-size-5">Current Treatment:</h3>
         <table class="table is-bordered">
             <tbody id="patientTreatmentList">
-                
+                {{#if thisPatient}}
+                {{#each medicine as |med|}}
+                <tr>
+                  <td>{{med.name}}</td>
+                </tr>
+                {{/each}}
+                {{/if}}
             </tbody>
         </table>
       </section>

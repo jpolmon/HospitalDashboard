@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const { Doctor, Patient, Treatment, Medicine } = require("../models");
+const { Doctor, Patient, Medicine, Treatment } = require("../models");
 const withAuth = require("../utils/auth");
 
 router.get("/", (req, res) => {
@@ -14,31 +14,44 @@ router.get("/", (req, res) => {
 
 router.get("/doctorView", withAuth, async (req, res) => {
   try {
+    const availableMedications = await Medicine.findAll();
+    const availableMedicine = availableMedications.map((med) =>
+      med.get({ plain: true })
+    );
+
     const doctorData = await Doctor.findByPk(req.session.doctor_id, {
       attributes: { exclude: ["password"] },
-      include: [
-        {
-          model: Patient,
-          // attributes: ["firstName, lastName"],
-        },
-      ],
     });
     const doctor = doctorData.get({ plain: true });
 
-    // const patientData = await Patient.findAll({
-    //   include: [
-    //     {
-    //       model: Patient,
-    //       // attributes: ["firstName, lastName"],
-    //     },
-    //   ],
+    const patientData = await Patient.findAll({
+      where: { doctor_id: req.session.doctor_id },
+    });
+
+    const patient = patientData.map((singlePatient) =>
+      singlePatient.get({ plain: true })
+    );
+    // const treatmentData = await Treatment.findAll({
+    //   where: { patient_id: id },
     // });
-    // const patients = patientData.get({ plain: true });
-    res.json(doctor);
-    // res.render("doctorView", {
-    //   ...doctor,
-    //   logged_in: req.session.logged_in,
-    // });
+
+    // const medicineData = [];
+    // for (const treatment of treatmentData) {
+    //   medicineData.push(await Medicine.findByPk(treatment.medicine_id));
+    // }
+    // const medicine = medicineData.map((singleMedication) =>
+    //   singleMedication.get({ plain: true })
+    // );
+
+    // res.json(patient);
+
+    res.render("doctorView", {
+      ...doctor,
+      allMedications: availableMedicine,
+      patients: patient,
+      // medications: medicine,
+      logged_in: req.session.logged_in,
+    });
   } catch (err) {
     res.status(500).json(err);
   }
@@ -81,15 +94,6 @@ router.get("/patientView", withAuth, async (req, res) => {
     console.log(err);
     res.status(500).json(err);
   }
-});
-
-router.get("/login", (req, res) => {
-  if (req.session.logged_in) {
-    res.redirect("/dashboard");
-    return;
-  }
-
-  res.render("login");
 });
 
 module.exports = router;

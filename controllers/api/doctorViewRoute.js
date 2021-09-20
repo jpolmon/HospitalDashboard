@@ -14,11 +14,6 @@ router.get("/", withAuth, async (req, res) => {
     const staff = userData.get({ plain: true });
 
     console.log(req.session);
-
-    res.render("doctorView", {
-      ...staff,
-      logged_in: true,
-    });
   } catch (err) {
     res.status(500).json(err);
   }
@@ -56,4 +51,15 @@ router.post("/login", async (req, res) => {
     res.status(400).json(err);
   }
 });
+
+router.post("/logout", (req, res) => {
+  if (req.session.logged_in) {
+    req.session.destroy(() => {
+      res.status(204).end();
+    });
+  } else {
+    res.status(404).end();
+  }
+});
+
 module.exports = router;

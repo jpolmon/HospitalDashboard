@@ -1,5 +1,5 @@
 <section class="mt-4"> 
-    <h1 class="title has-text-centered mt-5">Welcome to your dashboard {{patient.firstName}} {{patient.lastName}}!</h1> 
+    <h1 class="title has-text-centered mt-5">Welcome to your Dashboard {{patient.firstName}} {{patient.lastName}}!</h1> 
 </section>
 
 <main class="columns mt-5">
@@ -13,7 +13,7 @@
     </section>
 
     <section class="column is-3 is-offset-1">
-        <h2 class="label is-size-5">Select Medication to add to cart:</h2>
+        <h2 class="label is-size-5">Select Medication to Add to Cart:</h2>
         {{#each medications as |medication|}}
             <input class="is-size-5" type="checkbox" id='{{medication.name}}' name="medication" value='{{medication.price}}'>
             <label class="is-size-5" for='{{medication.name}}'>{{medication.name}}</label>

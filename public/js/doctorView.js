@@ -1,47 +1,46 @@
-const newFormHandler = async (event) => {
-  event.preventDefault();
+// adds checked medications to the treatment container
 
-  const firstName = document.querySelector("#patient-firstName").value.trim();
-  const lastName = document.querySelector("#patient-lastName").value.trim();
-  const email = document.querySelector("#patient-email").value.trim();
-  
-  if (firstName && lastName && email) {
-    const response = await fetch(`/api/patients`, {
-      method: "POST",
-      body: JSON.stringify({ firstName, lastName, email}),
+const getPatientInfoHandler = async (event) => {
+  if (event.target.hasAttribute("patientBlock")) {
+    const id = event.target.getAttribute("patientBlock");
+
+    const response = await fetch(`/api/patients/${id}`, {
+      method: "GET",
       headers: {
         "Content-Type": "application/json",
       },
-    });
-
-    if (response.ok) {
-      document.location.replace("/doctorView");
-    } else {
-      alert("Failed to create new patient");
-    }
+    })
+      .then((res) => res.json())
+      .then((data) => data);
+    const renderPatientInfo = (patientId) => {
+      let list = document.querySelector("#patientTreatmentList");
+    };
+    getPatientInfoHandler().then((res) => renderPatientInfo(item));
   }
 };
 
-const delButtonHandler = async (event) => {
-  if (event.target.hasAttribute("data-id")) {
-    const id = event.target.getAttribute("data-id");
+document.getElementById("updateTreatmentBtn").onclick = function () {
+  let elementsToRemove = document.querySelectorAll("tr");
+  for (const element of elementsToRemove) {
+    element.remove();
+  }
 
-    const response = await fetch(`/api/patients/${id}`, {
-      method: "DELETE",
-    });
+  let list = document.querySelector("#patientTreatmentList");
 
-    if (response.ok) {
-      document.location.replace("/patient");
-    } else {
-      alert("Failed to delete ");
-    }
+  let checkBoxes = document.querySelectorAll(
+    'input[name="medication"]:checked'
+  );
+  for (const checkbox of checkBoxes) {
+    const entryContainer = document.createElement("tr");
+    const entryName = document.createElement("td");
+    const medName = document
+      .querySelector(`#${checkbox.getAttribute("id")}`)
+      .getAttribute("id");
+    const nameNode = document.createTextNode(medName);
+
+    entryName.appendChild(nameNode);
+    entryContainer.appendChild(entryName);
+
+    list.appendChild(entryContainer);
   }
 };
-
-document
-  .querySelector(".new-project-form")
-  .addEventListener("submit", newFormHandler);
-
-document
-  .querySelector(".project-list")
-  .addEventListener("click", delButtonHandler);

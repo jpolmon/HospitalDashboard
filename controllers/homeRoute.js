@@ -31,6 +31,22 @@ router.get("/doctorView", withAuth, async (req, res) => {
     const patient = patientData.map((singlePatient) =>
       singlePatient.get({ plain: true })
     );
+
+    // const treatmentData = [];
+    // for (const pat of patientData) {
+    //   treatmentData.push(
+    //     await Treatment.findAll({ where: { patient_id: pat.id } })
+    //   );
+    // }
+
+    // const medicationData = [];
+    // for (const treatment of treatmentData) {
+    //   medicationData.push(await Medicine.findByPk(treatment.medicine_id));
+    // }
+
+    // const medications = medicationData.map((medicine) =>
+    //   medicine.get({ plain: true })
+    // );
     // const treatmentData = await Treatment.findAll({
     //   where: { patient_id: id },
     // });
@@ -49,7 +65,50 @@ router.get("/doctorView", withAuth, async (req, res) => {
       ...doctor,
       allMedications: availableMedicine,
       patients: patient,
-      // medications: medicine,
+      // medicine: medications,
+      logged_in: req.session.logged_in,
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+router.get("/doctorView/:patientId", withAuth, async (req, res) => {
+  try {
+    const doctorData = await Doctor.findByPk(req.session.doctor_id, {
+      attributes: { exclude: ["password"] },
+    });
+
+    const doctor = doctorData.get({ plain: true });
+
+    const availableMedications = await Medicine.findAll();
+    const availableMedicine = availableMedications.map((med) =>
+      med.get({ plain: true })
+    );
+
+    const patientData = await Patient.findAll({
+      where: { doctor_id: req.session.doctor_id },
+    });
+
+    const patient = patientData.map((singlePatient) =>
+      singlePatient.get({ plain: true })
+    );
+
+    const thisPatientData = await Patient.findOne({
+      include: Medicine,
+      where: {
+        doctor_id: req.session.doctor_id,
+        id: req.params.patientId,
+      },
+    });
+
+    const thisPatient = thisPatientData.get({ plain: true });
+
+    res.render("doctorView", {
+      ...doctor,
+      allMedications: availableMedicine,
+      patients: patient,
+      thisPatient: thisPatient,
       logged_in: req.session.logged_in,
     });
   } catch (err) {

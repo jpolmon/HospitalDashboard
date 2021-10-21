@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const { Doctor, Patient, Medicine } = require("../../models");
+const { Doctor, Patient, Medicine, Treatment } = require("../../models");
 const withAuth = require("../../utils/auth");
 
 // Use withAuth middleware to prevent access to route
@@ -18,6 +18,24 @@ router.get("/", withAuth, async (req, res) => {
     res.status(500).json(err);
   }
 });
+
+router.post("/:id", async (req, res) => {
+  
+  for(const medicine of req.body.medicationsToAdd) {
+    
+    const medication = await Medicine.findOne({
+      where: { name: medicine }
+    });
+    
+    const treatment = await Treatment.create({
+      patient_id: req.body.id,
+      medicine_id: medication.id
+    }).catch((err) => {
+      console.log(err);
+    });
+  }
+  
+})
 
 router.post("/login", async (req, res) => {
   try {

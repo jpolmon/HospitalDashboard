@@ -32,34 +32,12 @@ router.get("/doctorView", withAuth, async (req, res) => {
       singlePatient.get({ plain: true })
     );
 
-    // const treatmentData = [];
-    // for (const pat of patientData) {
-    //   treatmentData.push(
-    //     await Treatment.findAll({ where: { patient_id: pat.id } })
-    //   );
-    // }
-
-    // const medicationData = [];
-    // for (const treatment of treatmentData) {
-    //   medicationData.push(await Medicine.findByPk(treatment.medicine_id));
-    // }
-
-    // const medications = medicationData.map((medicine) =>
-    //   medicine.get({ plain: true })
-    // );
-    // const treatmentData = await Treatment.findAll({
-    //   where: { patient_id: id },
-    // });
-
-    // const medicineData = [];
-    // for (const treatment of treatmentData) {
-    //   medicineData.push(await Medicine.findByPk(treatment.medicine_id));
-    // }
-    // const medicine = medicineData.map((singleMedication) =>
-    //   singleMedication.get({ plain: true })
-    // );
-
-    // res.json(patient);
+    const treatmentData = [];
+    for (const pat of patientData) {
+      treatmentData.push(
+        await Treatment.findAll({ where: { patient_id: pat.id } })
+      );
+    }
 
     res.render("doctorView", {
       ...doctor,
@@ -80,7 +58,6 @@ router.get("/doctorView/:patientId", withAuth, async (req, res) => {
     });
 
     const doctor = doctorData.get({ plain: true });
-
     const availableMedications = await Medicine.findAll();
     const availableMedicine = availableMedications.map((med) =>
       med.get({ plain: true })
@@ -95,7 +72,6 @@ router.get("/doctorView/:patientId", withAuth, async (req, res) => {
     );
 
     const thisPatientData = await Patient.findOne({
-      include: Medicine,
       where: {
         doctor_id: req.session.doctor_id,
         id: req.params.patientId,
@@ -104,13 +80,24 @@ router.get("/doctorView/:patientId", withAuth, async (req, res) => {
 
     const thisPatient = thisPatientData.get({ plain: true });
 
-    res.render("doctorView", {
-      ...doctor,
-      allMedications: availableMedicine,
-      patients: patient,
-      thisPatient: thisPatient,
-      logged_in: req.session.logged_in,
+    const thisTreatmentData = await Treatment.findAll({
+      where: { patient_id: req.params.patientId }
     });
+
+    const thisTreatment = thisTreatmentData.map((treatment) => 
+      treatment.get({ plain: true })
+    );
+
+    const medications = [];
+    for (const treatment of thisTreatment) {
+      medications.push(await Medicine.findByPk(treatment.medicine_id));
+    }
+
+    const medicine = medications.map((medication) =>
+      medication.get({ plain: true })
+    );
+
+    res.status(200).json(medicine)
   } catch (err) {
     res.status(500).json(err);
   }

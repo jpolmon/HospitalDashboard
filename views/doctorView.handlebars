@@ -4,7 +4,7 @@
     </article>
     
     <main class ="columns mt-3">
-      <section class="column is-3 is offset-1">
+      <section class="column is-3 is-offset-1">
         <article class="panel is-info">
           <p class="panel-heading">
             Patient Information
@@ -12,27 +12,19 @@
           <p class="panel-tabs">
             <a class="is-active">All</a>
           </p>
-          <div class="panel-block">
-            <p class="control has-icons-left">
-              <input class="input is-info" type="text" placeholder="Search">
-              <span class="icon is-left">
-                <i class="fas fa-search" aria-hidden="true"></i>
-              </span>
-            </p>
-          </div>
           {{#each patients as |patient|}}
           <a class="panel-block patientBlock" id="{{patient.id}}">
             <span class="panel-icon">
               <i class="fas fa-user" aria-hidden="true"></i>
             </span>
-            {{patient.id}}: {{patient.lastName}}, {{patient.firstName}}
+            {{patient.lastName}}, {{patient.firstName}}
           </a>
           {{/each}}
         </article>
       </section>
 
-      <section class="column is-3 is-offset-1">
-        <h3 class="label is-size-5">Current Treatment:</h3>
+      <section class="column is-2 is-offset-1">
+        <h3 class="label is-size-5">Current Treatments:</h3>
         <table class="table is-bordered">
             <tbody id="patientTreatmentList">
                 {{#if thisPatient}}
@@ -46,12 +38,13 @@
         </table>
       </section>
 
-      <section class="column is-3 is-offset-1">
+      <section class="column is-2 is-offset-1">
         <h2 class="label is-size-5">Select Medication to Add to Treatment:</h2>
         {{#each allMedications as |medication|}}
+          <div id='{{medication.name}}' class='checkboxes'>
             <input class="is-size-5" type="checkbox" id='{{medication.name}}' name="medication">
             <label class="is-size-5" for='{{medication.name}}'>{{medication.name}}</label>
-            <br>                    
+          </div>                              
         {{/each}}
         <button class="button is-success mt-2" id="updateTreatmentBtn">
             Update Treatment

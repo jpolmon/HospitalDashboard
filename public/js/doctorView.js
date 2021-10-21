@@ -1,3 +1,5 @@
+const { response } = require("express");
+
 let patientBtns = document.querySelectorAll(".patientBlock");
 let medicineOptions = document.querySelectorAll(".checkboxes");
 
@@ -88,13 +90,13 @@ document.getElementById("updateTreatmentBtn").onclick = async function () {
 
     bigBox.appendChild(entryContainer);
   }
-
+  
   let response = await fetch(`/api/doctors/${id}`, {
     method: "POST",
     body: JSON.stringify({ medicationsToAdd, id }),
     headers: { "Content-Type": "application/json" },
   });
-
+  
   const newMedList = await response.json();
   console.log(newMedList);
 };

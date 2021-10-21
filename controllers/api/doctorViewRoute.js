@@ -20,21 +20,26 @@ router.get("/", withAuth, async (req, res) => {
 });
 
 router.post("/:id", async (req, res) => {
-  
-  for(const medicine of req.body.medicationsToAdd) {
-    
-    const medication = await Medicine.findOne({
-      where: { name: medicine }
-    });
-    
-    const treatment = await Treatment.create({
-      patient_id: req.body.id,
-      medicine_id: medication.id
-    }).catch((err) => {
-      console.log(err);
-    });
+  try{
+    let newTreatments = []
+    for(const medicine of req.body.medicationsToAdd) {
+      const medication = await Medicine.findOne({
+        where: { name: medicine }
+      });
+      
+      const treatment = await Treatment.create({
+        patient_id: req.body.id,
+        medicine_id: medication.id
+      }).catch((err) => {
+        console.log(err);
+      });
+
+      newTreatments.push(treatment)
+    }
+    res.status(200).json(newTreatments);  
+  } catch (err) {
+    res.status(400).json(err);
   }
-  
 })
 
 router.post("/login", async (req, res) => {

@@ -1,4 +1,4 @@
-## GRAY MEMORIAL HOSPITAL'S PHARMACY SYSTEM
+## GREY MEMORIAL HOSPITAL'S PHARMACY SYSTEM
 
 # Table of Contents
   <ol>
@@ -12,10 +12,14 @@
 
 # Description
 
-Gray's Memorial Hospital's pharmacy system is designed for staff and patients to view their own portal.
-User story:
-- Doctors are allowed to view a list of patients and add treatment based on their needs.
-- Patients are only allowed to view their own portal and add treatment to their shopping cart.
+Grey's Memorial Hospital's pharmacy system is a web application that enables both patients and staff members to interact with each other.
+
+Some features of the application are: 
+- When users visit the site they are prompted to either log in or register.
+    - Doctor accounts are generated on the back-end and cannot be created, these accounts are validated through the email domain. 
+    - When a user creates a profile they are randomly assigned a doctor from the available doctors in the system. 
+- When a patient logs in they are able to view their current medications and select a combination to view the total cost. 
+- When a staff member logs in they are able to see the patients they have been assigned and assign medications to them. 
 
 # Usage
 
@@ -25,7 +29,7 @@ Built with
 - [Express.js](https://expressjs.com/)
 - [MySQL](https://www.mysql.com/)
 - [Node.js](https://nodejs.org/en/)
-- [Heroky](https://dashboard.heroku.com/login)
+- [Heroku](https://dashboard.heroku.com/login)
 - [Hanndlebars.js](https://handlebarsjs.com/)
 - [Sequelize-ORM](https://sequelize.org/)
 

@@ -19,9 +19,10 @@ router.get("/", withAuth, async (req, res) => {
   }
 });
 
-router.post("/:id", async (req, res) => {
+router.post("/addTreatments/:id", async (req, res) => {
   try{
-    let newTreatments = []
+    let newTreatments = [];
+    console.log(req.body);
     for(const medicine of req.body.medicationsToAdd) {
       const medication = await Medicine.findOne({
         where: { name: medicine }
@@ -35,8 +36,7 @@ router.post("/:id", async (req, res) => {
       });
 
       newTreatments.push(treatment)
-    }
-    res.status(200).json(newTreatments);  
+    }  
   } catch (err) {
     res.status(400).json(err);
   }

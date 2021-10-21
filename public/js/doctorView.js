@@ -2,7 +2,7 @@ let patientBtns = document.querySelectorAll(".patientBlock");
 let medicineOptions = document.querySelectorAll(".checkboxes");
 
 // adds checked medications to the treatment container
-let id = 0;
+let id;
 
 const getPatientInfoHandler = async (event) => {
 
@@ -89,7 +89,7 @@ document.getElementById("updateTreatmentBtn").onclick = async function () {
     bigBox.appendChild(entryContainer);
   }
   
-  let response = await fetch(`/api/doctors/${id}`, {
+  let response = await fetch(`/api/doctors/addTreatments/${id}`, {
     method: "POST",
     body: JSON.stringify({ medicationsToAdd, id }),
     headers: { "Content-Type": "application/json" },

@@ -1,5 +1,3 @@
-const { response } = require("express");
-
 let patientBtns = document.querySelectorAll(".patientBlock");
 let medicineOptions = document.querySelectorAll(".checkboxes");
 
